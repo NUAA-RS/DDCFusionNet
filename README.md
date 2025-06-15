@@ -2,11 +2,11 @@
 
 ![](./DDCFusionNet.png)
 
-(a) "![](./dmrm.png)"
+## (a)DMRM "![](./dmrm.png)"
 
-(b) "![](./apsfm.png)"
+## (b)APSFM "![](./apsfm.png)"
 
-(c) "![](./cdfm.png)"
+## (c)CDFM "![](./cdfm.png)"
 
 
 ## Environments
