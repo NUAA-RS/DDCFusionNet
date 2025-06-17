@@ -19,8 +19,8 @@ cuda 11.8
 ## Install
 
 ```
-conda create -n DDCFusionNet python=3.10
-conda activate DDCFusionNet
+conda create -n DPFFusion python=3.10
+conda activate DPFFusion
 pip install -r requirements.txt
 ```
 
@@ -41,4 +41,4 @@ python fuse.py
 
 ## Dataset
 
-MSRS dataset is used to train. You can get it from [here](https://pan.baidu.com/s/1lmLmkbbSMr_PEwZdr3HPhg?pwd=ktvq).
+Datasets (M3FD, MSRS, RoadScene) are used to train. You can get it from [here](https://pan.baidu.com/s/1lmLmkbbSMr_PEwZdr3HPhg?pwd=ktvq).
