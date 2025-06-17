@@ -1,7 +1,4 @@
 import os
-
-os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import random
 import torch
 import torch.nn as nn
@@ -19,13 +16,11 @@ from tqdm import tqdm
 import argparse
 import numpy as np
 
-import wandb
-
+# import wandb  # 注释掉Wandb的导入
 
 def to_device(mlist, device):
     for module in mlist:
         module.to(device)
-
 
 def init_params_group(mlist):
     pg0, pg1, pg2 = [], [], []
@@ -36,7 +31,6 @@ def init_params_group(mlist):
         pg2.extend(pg[2])
     return pg0, pg1, pg2
 
-
 def set_seed(seed):
     random.seed(seed)
     np.random.seed(seed)
@@ -44,16 +38,12 @@ def set_seed(seed):
     torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.deterministic = True
 
-
 def train(cfg_path, wb_key):
     config = yaml.safe_load(open(cfg_path))
     cfg = from_dict(config)
     set_seed(cfg.seed)
     log_f = '%(asctime)s | %(filename)s[line:%(lineno)d] | %(levelname)s | %(message)s'
     logging.basicConfig(level='INFO', format=log_f)
-    # wandb
-    wandb.login(key=wb_key)  # wandb api key
-    runs = wandb.init(project=cfg.project_name, name=cfg.dataset_name + '_' + cfg.exp_name, config=cfg, mode=cfg.wandb_mode)
 
     # Model
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -86,7 +76,6 @@ def train(cfg_path, wb_key):
     ------------------------------------------------------------------------------
     '''
 
-    # torch.backends.cudnn.benchmark = True
     logging.info('Start training...')
     for epoch in range(cfg.start_epoch, cfg.num_epochs):
         '''train'''
@@ -154,9 +143,6 @@ def train(cfg_path, wb_key):
             'lr': optimizer.param_groups[0]["lr"],
         }
 
-        # update wandb
-        runs.log(log_dict)
-
         # 每隔几个epoch保存一次模型
         if (epoch + 1) % cfg.epoch_gap == 0:
             checkpoint = {'fuse_net': fuse_net.state_dict()}
@@ -176,4 +162,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     train(args.cfg, args.auth)
     # 运行命令行代码
-    os.system(f'nohup python val.py')
+    os.system(f'python val.py')

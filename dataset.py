@@ -26,13 +26,12 @@ def check_mask(root: Path, img_list, config: ConfigDict):
         saliency = Saliency()
         saliency.inference(src=root / 'ir', dst=root / 'mask', suffix='png')
 
-
 class M3FD(Dataset):
     def __init__(self, cfg: ConfigDict, mode: Literal['train', 'val', 'test']):
         super().__init__()
         self.cfg = cfg
         self.mode = mode
-        self.img_list = Path(Path(self.cfg.dataset_root) / 'meta' / f'{mode}.txt').read_text().splitlines()
+        self.img_list = Path(Path(self.cfg.dataset_root) / f'{mode}.txt').read_text().splitlines()
         logging.info(f'load {len(self.img_list)} images')
         self.train_transforms = Compose([Resize((cfg.img_size, cfg.img_size))])
 
@@ -80,6 +79,61 @@ class M3FD(Dataset):
         if self.mode == 'train':
             mask_batch = torch.stack(mask_batch, dim=0)
         return ir_img_batch, vi_img_batch, mask_batch, img_name_batch
+
+
+# class M3FD(Dataset):
+#     def __init__(self, cfg: ConfigDict, mode: Literal['train', 'val', 'test']):
+#         super().__init__()
+#         self.cfg = cfg
+#         self.mode = mode
+#         self.img_list = Path(Path(self.cfg.dataset_root) / 'meta' / f'{mode}.txt').read_text().splitlines()
+#         logging.info(f'load {len(self.img_list)} images')
+#         self.train_transforms = Compose([Resize((cfg.img_size, cfg.img_size))])
+#
+#         if self.mode == 'train' and cfg.have_seg_label == False:
+#             self.ir_path = Path(Path(self.cfg.dataset_root) / 'ir')
+#             self.vi_path = Path(Path(self.cfg.dataset_root) / 'vi')
+#             check_mask(Path(cfg.dataset_root), self.img_list, cfg)
+#             self.mask_path = Path(Path(self.cfg.dataset_root) / 'mask')
+#         if self.mode == 'train' and cfg.have_seg_label == True:
+#             self.ir_path = Path(Path(self.cfg.dataset_root) / 'ir')
+#             self.vi_path = Path(Path(self.cfg.dataset_root) / 'vi')
+#             self.mask_path = Path(Path(self.cfg.dataset_root) / 'labels')
+#         if self.mode == 'test':
+#             self.ir_path = Path(Path(self.cfg.dataset_root) / 'test' / 'ir')
+#             self.vi_path = Path(Path(self.cfg.dataset_root) / 'test' / 'vi')
+#
+#     def __len__(self):
+#         return len(self.img_list)
+#
+#     def __getitem__(self, index):
+#         img_name = self.img_list[index]
+#         ir_img = img_read(os.path.join(self.ir_path, img_name), mode='L')
+#         vi_img, vi_cbcr = img_read(os.path.join(self.vi_path, img_name), mode='YCbCr')
+#         if self.mode == 'train':
+#             mask = img_read(os.path.join(self.mask_path, img_name), mode='L')
+#         else:
+#             mask = None
+#
+#         if self.mode == 'train':
+#             ir_img = self.train_transforms(ir_img)
+#             vi_img = self.train_transforms(vi_img)
+#             mask = self.train_transforms(mask)
+#         else:
+#             _, h, w = ir_img.shape
+#             if h // 2 != 0 or w // 2 != 0:
+#                 ir_img = ir_img[:, : h // 2 * 2, : w // 2 * 2]
+#                 vi_img = vi_img[:, : h // 2 * 2, : w // 2 * 2]
+#
+#         return ir_img, vi_img, mask, img_name
+#
+#     def __collate_fn__(self, batch):
+#         ir_img_batch, vi_img_batch, mask_batch, img_name_batch = zip(*batch)
+#         ir_img_batch = torch.stack(ir_img_batch, dim=0)
+#         vi_img_batch = torch.stack(vi_img_batch, dim=0)
+#         if self.mode == 'train':
+#             mask_batch = torch.stack(mask_batch, dim=0)
+#         return ir_img_batch, vi_img_batch, mask_batch, img_name_batch
 
 
 class MSRS(Dataset):
