@@ -1,0 +1,150 @@
+2025-06-05 20:48:15,580 INFO    MainThread:20856 [wandb_setup.py:_flush():67] Current SDK version is 0.19.8
+2025-06-05 20:48:15,580 INFO    MainThread:20856 [wandb_setup.py:_flush():67] Configure stats pid to 20856
+2025-06-05 20:48:15,580 INFO    MainThread:20856 [wandb_setup.py:_flush():67] Loading settings from C:\Users\XIE\.config\wandb\settings
+2025-06-05 20:48:15,580 INFO    MainThread:20856 [wandb_setup.py:_flush():67] Loading settings from E:\wangli\SFDFusion\SFDFusion-main\wandb\settings
+2025-06-05 20:48:15,580 INFO    MainThread:20856 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-06-05 20:48:15,580 INFO    MainThread:20856 [wandb_init.py:setup_run_log_directory():647] Logging user logs to E:\wangli\SFDFusion\SFDFusion-main\wandb\run-20250605_204815-90xtgd4e\logs\debug.log
+2025-06-05 20:48:15,582 INFO    MainThread:20856 [wandb_init.py:setup_run_log_directory():648] Logging internal logs to E:\wangli\SFDFusion\SFDFusion-main\wandb\run-20250605_204815-90xtgd4e\logs\debug-internal.log
+2025-06-05 20:48:15,582 INFO    MainThread:20856 [wandb_init.py:init():761] calling init triggers
+2025-06-05 20:48:15,582 INFO    MainThread:20856 [wandb_init.py:init():766] wandb.init called with sweep_config: {}
+config: {'dataset_root': './RoadScene', 'dataset_name': 'RoadScene', 'seed': 3407, 'have_seg_label': False, 'project_name': 'SFDFusion', 'exp_name': 'model-1_1_10_1', 'resume': None, 'img_size': 320, 'log_level': 'INFO', 'wandb_mode': 'online', 'start_epoch': 0, 'num_epochs': 50, 'epoch_gap': 50, 'batch_size': 4, 'num_workers': 0, 'lr_i': 0.0005, 'lr_f': 0.1, 'momentum': 0.937, 'coeff_content': 1, 'coeff_ssim': 1, 'coeff_saliency': 10, 'coeff_fre': 1, '_wandb': {}}
+2025-06-05 20:48:15,582 INFO    MainThread:20856 [wandb_init.py:init():784] starting backend
+2025-06-05 20:48:15,582 INFO    MainThread:20856 [wandb_init.py:init():788] sending inform_init request
+2025-06-05 20:48:15,594 INFO    MainThread:20856 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=spawn, using: spawn
+2025-06-05 20:48:15,594 INFO    MainThread:20856 [wandb_init.py:init():798] backend started and connected
+2025-06-05 20:48:15,595 INFO    MainThread:20856 [wandb_init.py:init():891] updated telemetry
+2025-06-05 20:48:15,597 INFO    MainThread:20856 [wandb_init.py:init():915] communicating run to backend with 90.0 second timeout
+2025-06-05 20:48:46,612 INFO    Thread-6 (wrapped_target):20856 [retry.py:__call__():175] Retry attempt failed:
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\new_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "D:\Anaconda\envs\new_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "D:\Anaconda\envs\new_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\new_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "D:\Anaconda\envs\new_env\lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "D:\Anaconda\envs\new_env\lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "D:\Anaconda\envs\new_env\lib\site-packages\urllib3\connection.py", line 704, in connect
+    self.sock = sock = self._new_conn()
+  File "D:\Anaconda\envs\new_env\lib\site-packages\urllib3\connection.py", line 207, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x000001E12E1B01C0>, 'Connection to api.wandb.ai timed out. (connect timeout=20)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\new_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "D:\Anaconda\envs\new_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "D:\Anaconda\envs\new_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000001E12E1B01C0>, 'Connection to api.wandb.ai timed out. (connect timeout=20)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\lib\retry.py", line 134, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\internal\internal_api.py", line 398, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\vendor\gql-0.2.0\wandb_gql\client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\vendor\gql-0.2.0\wandb_gql\client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\lib\gql_request.py", line 58, in execute
+    request = self.session.post(self.url, **post_args)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\requests\sessions.py", line 637, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\requests\adapters.py", line 688, in send
+    raise ConnectTimeout(e, request=request)
+requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000001E12E1B01C0>, 'Connection to api.wandb.ai timed out. (connect timeout=20)'))
+2025-06-05 20:49:45,619 ERROR   MainThread:20856 [wandb_init.py:init():1478] error in wandb.init()
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\new_env\lib\asyncio\locks.py", line 214, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\new_env\lib\asyncio\tasks.py", line 456, in wait_for
+    return fut.result()
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\mailbox\response_handle.py", line 109, in wait_async
+    await asyncio.wait_for(evt.wait(), timeout=timeout)
+  File "D:\Anaconda\envs\new_env\lib\asyncio\tasks.py", line 458, in wait_for
+    raise exceptions.TimeoutError() from exc
+asyncio.exceptions.TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\wandb_init.py", line 941, in init
+    result = wait_with_progress(
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\mailbox\wait_with_progress.py", line 24, in wait_with_progress
+    return wait_all_with_progress(
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\mailbox\wait_with_progress.py", line 87, in wait_all_with_progress
+    return asyncio_compat.run(progress_loop_with_timeout)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\lib\asyncio_compat.py", line 30, in run
+    return future.result()
+  File "D:\Anaconda\envs\new_env\lib\concurrent\futures\_base.py", line 458, in result
+    return self.__get_result()
+  File "D:\Anaconda\envs\new_env\lib\concurrent\futures\_base.py", line 403, in __get_result
+    raise self._exception
+  File "D:\Anaconda\envs\new_env\lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\lib\asyncio_compat.py", line 74, in run
+    return asyncio.run(self._run_or_cancel(fn))
+  File "D:\Anaconda\envs\new_env\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "D:\Anaconda\envs\new_env\lib\asyncio\base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\lib\asyncio_compat.py", line 98, in _run_or_cancel
+    return fn_task.result()
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\mailbox\wait_with_progress.py", line 82, in progress_loop_with_timeout
+    return await _wait_handles_async(
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\mailbox\wait_with_progress.py", line 130, in _wait_handles_async
+    async with asyncio_compat.open_task_group() as task_group:
+  File "D:\Anaconda\envs\new_env\lib\contextlib.py", line 206, in __aexit__
+    await anext(self.gen)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\lib\asyncio_compat.py", line 190, in open_task_group
+    await task_group._wait_all()
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\lib\asyncio_compat.py", line 159, in _wait_all
+    raise exc
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\mailbox\wait_with_progress.py", line 128, in wait_single
+    results[index] = await handle.wait_async(timeout=timeout)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\mailbox\mailbox_handle.py", line 126, in wait_async
+    response = await self._handle.wait_async(timeout=timeout)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\mailbox\response_handle.py", line 118, in wait_async
+    raise TimeoutError(
+TimeoutError: Timed out waiting for response on vvrwt0l262yw
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\wandb_init.py", line 1468, in init
+    return wi.init(run_settings, run_config)
+  File "D:\Anaconda\envs\new_env\lib\site-packages\wandb\sdk\wandb_init.py", line 954, in init
+    raise CommError(
+wandb.errors.errors.CommError: Run initialization has timed out after 90.0 sec. Please try increasing the timeout with the `init_timeout` setting: `wandb.init(settings=wandb.Settings(init_timeout=120))`.
+2025-06-05 20:49:46,435 INFO    MsgRouterThr:20856 [mailbox.py:close():129] Closing mailbox, abandoning 1 handles.
